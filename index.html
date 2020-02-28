@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Rock Paper Scissors
+        </title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <script>
+            // generate a random integer within the given range
+            function randomInt(min, max)
+            {
+                return Math.round(Math.random() * (max - min) + min);
+            }
+            // generate a random computer selected move
+            function computerPlay()
+            {
+                let randInt = randomInt(1, 3); // generate a random integer between 1 and 3
+                switch (randInt)
+                {
+                    case 1: return "Rock"; break;
+                    case 2: return "Paper"; break;
+                    case 3: return "Scissors"; break;
+                }
+            }
+            // play a round
+            function playRound(playerSelection, computerSelection, scores)
+            {
+                playerSelection = playerSelection.toLowerCase();
+                computerSelection = computerSelection.toLowerCase();
+                switch (playerSelection)
+                {
+                    case "rock": // when the player chooses rock
+                    {
+                        switch (computerSelection)
+                        {
+                            case "rock": return "It's a tie!";
+                            case "paper": scores[1]++; return "You lose! Paper beats rock";
+                            case "scissors": scores[0]++; return "You win! Rock beats scissors";
+                        }
+                    }
+                    case "paper": // when the player chooses paper
+                    {
+                        switch (computerSelection)
+                        {
+                            case "rock": scores[0]++; return "You win! Paper beats rock";
+                            case "paper": return "It's a tie!";
+                            case "scissors": scores[1]++; return "You lose! Scissors beats paper";
+                        }
+                    }
+                    case "scissors": // when the player chooses scissors
+                    {
+                        switch (computerSelection)
+                        {
+                            case "rock": scores[1]++; return "You lose! Rock beats scissors";
+                            case "paper": scores[0]++; return "You win! Scissors beats paper"
+                            case "scissors": return "It's a tie!";
+                        }
+                    }
+                }
+            }
+            // play a game
+            function game()
+            {
+                let scores = [0, 0]; // [playerScore, compScore]
+                for (i=0; i<5; i++)
+                {
+                    let playerMove = prompt("Rock, paper, or scissors?")
+                    playRound(playerMove, computerSelection);
+                }
+                if (scores[0] > scores[1])
+                    return "Congratulations, you won!"
+                else if (scores[0] < scores[1])
+                    return "Sorry, you lost!"
+                else
+                    return "It's a draw, since we played 5 rounds including ties!"
+            }
+        </script>
+    </body>
+</html>
